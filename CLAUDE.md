@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** December 14, 2025 (Session 6 - Python Strategy Integration)
-**Current Phase:** 🚀 PHASE 8 - PYTHON STRATEGY INTEGRATION (Session 1 - Regime-Based Routing COMPLETE)
+**Last Updated:** December 31, 2025 (Phase 8 - Multi-Pair Backtesting Design)
+**Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Design Complete - Ready for Implementation)
 
 ---
 
@@ -46,8 +46,9 @@
 ├── STATUS.md                          # Dynamic status tracking
 ├── Jcamp_BacktestEA.mq5              # MT5 Expert Advisor (reference)
 │
-├── plans/                             # Detailed implementation plans
-│   └── Phase_7B_C#StrategyMigrationImplementation_Plan.md
+├── Plans/                             # Detailed implementation plans
+│   ├── Phase_7B_C#StrategyMigrationImplementation_Plan.md
+│   └── 2025-12-31-MultiPair-Backtest-Design.md
 │
 ├── jcamp-python-backtesting/         # Python backtesting (Git repo)
 │   ├── src/
@@ -153,32 +154,35 @@ ls -la /d/JcampFxTrading/CSMMonitor/JcampForexTrader/Models/Indicators/
 
 ---
 
-## 🎯 CURRENT FOCUS: PHASE 7B COMPLETE ✅
+## 🎯 CURRENT FOCUS: PHASE 8 - MULTI-PAIR BACKTESTING DESIGN ✅
 
-**Phase 7B Status:** ✅ **COMPLETE** - All 5 sessions finished successfully
+**Phase 8 Status:** ✅ **DESIGN COMPLETE** - Ready for Implementation
 
-**Final Branch State:**
-- C#: `phase7-csharp-strategies` (Ready for validation testing and merge to main)
+**Design Document:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 
-**All Issues Resolved:**
-1. ✅ **Session 4**: Strategy Signals not updating during M1 playback
-   - Fixed: Added UpdateStrategyPanel() call in RenderM1ChartUpToBar
-2. ✅ **Session 5**: Technical Indicators showing "N/A" during playback
-   - Root Cause: UpdateChartInfo() overwriting values after UpdateStrategyPanel()
-   - Fixed: Removed duplicate indicator updates from UpdateChartInfo()
+**Core Vision:** MT5 Strategy Tester reimagined with multi-pair support and realistic trading simulation
 
-**Completed Deliverables:**
-- ✅ C# Indicators (EMA, ATR, ADX, RSI) with Python parity
-- ✅ C# Regime Detection (TRENDING/RANGING/TRANSITIONAL)
-- ✅ C# Strategies (Trend Rider + Range Rider)
-- ✅ Strategy Engine with full orchestration
-- ✅ Chart Viewer integration with real-time display
-- ✅ M1 playback support with smooth strategy evaluation
+**Architecture Principle:** **Python = Brain** (single source of truth for strategy logic)
+- Python: Strategy evaluation, position management, backtest orchestration
+- C#: Visualization, playback controls, statistics display, export
 
-**Next Phase Options:**
-- Merge phase7-csharp-strategies to main branch
-- Begin Phase 6: Multi-pair backtesting
-- Add unit tests for C# strategy components
+**Key Features Designed:**
+- ✅ Multi-pair backtesting (test 3+ pairs simultaneously)
+- ✅ Strategy selection (Trend Rider, Range Rider, or both)
+- ✅ Interactive MT5-style playback (pause, step, jump to any trade)
+- ✅ Clickable trade timeline (review any trade instantly)
+- ✅ Real-time statistics (account status, open positions, performance)
+- ✅ Export functionality (CSV, reports, configurations)
+- ✅ Fast load times (~8-10 seconds for 1 year × 3 pairs)
+
+**Implementation Roadmap:** 5 Phases, 12-16 days
+- Phase 1: Python API Enhancement (2-3 days)
+- Phase 2: C# Configuration Window (2-3 days)
+- Phase 3: C# Playback Window (4-5 days)
+- Phase 4: Export & Reporting (1-2 days)
+- Phase 5: Testing & Validation (2-3 days)
+
+**Next Session:** Begin Phase 1 - Python API Enhancement
 
 ---
 
@@ -308,26 +312,77 @@ JSON Response to C# WPF
   - Performance: 100-600x faster than MT5
   - **See archived documentation for details**
 
-### 🚀 Phase 7B: C# Strategy Migration (CURRENT)
+### ✅ Phase 7B: C# Strategy Migration (COMPLETE)
 **Goal:** Port Python strategies to C# for local execution in chart viewer
 
-**Session 1:** ✅ Indicators + Regime Detection (COMPLETE)
-**Session 2:** ✅ Strategy Implementation (COMPLETE - Dec 11)
-- [x] IStrategy interface and BaseStrategy
-- [x] TrendRiderStrategy (135-point confidence scoring)
-- [x] RangeRiderStrategy (support/resistance detection)
-- [x] StrategyConfig models
-- **Files:** 6 new files (~1,290 LOC)
-- **Status:** Build verified, all compilation successful
+**Session 1-5:** ✅ All Complete (Dec 11-14, 2025)
+- [x] C# Indicators (EMA, ATR, ADX, RSI) with Python parity
+- [x] C# Regime Detection (TRENDING/RANGING/TRANSITIONAL)
+- [x] C# Strategies (Trend Rider + Range Rider)
+- [x] StrategyEngine orchestration
+- [x] ChartViewerWindow integration
+- [x] M1 playback support
+- **Files:** 17 new C# files (~2,800 LOC)
+- **Status:** ✅ Complete, ready for merge to main
 
-**Session 3:** 🔄 Strategy Integration & Testing (NEXT)
-- [ ] StrategyEngine orchestration
-- [ ] Unit tests for all components
-- [ ] ChartViewerWindow integration
+### 🚀 Phase 8: Multi-Pair Backtesting (CURRENT)
+**Goal:** MT5-style multi-pair backtesting with interactive playback
+
+**Design Document:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
+
+**Implementation Phases:**
+- **Phase 1:** Python API Enhancement (2-3 days) - NEXT
+  - Add `/backtest/multi-pair` endpoint
+  - Multi-pair orchestration logic
+  - Statistics breakdown by pair/strategy
+
+- **Phase 2:** C# Configuration Window (2-3 days)
+  - Multi-pair/strategy selection UI
+  - Risk parameter inputs
+  - API integration
+
+- **Phase 3:** C# Playback Window (4-5 days)
+  - MT5-style playback controls
+  - Interactive trade timeline
+  - Multi-pair chart viewer
+
+- **Phase 4:** Export & Reporting (1-2 days)
+  - CSV trade export
+  - Statistics reports
+
+- **Phase 5:** Testing & Validation (2-3 days)
+  - Unit & integration tests
+  - Signal validation vs MT5 (≥90% match)
+
+**Total Timeline:** 12-16 days
 
 ---
 
 ## 🔑 KEY DESIGN DECISIONS
+
+### Architecture Principle: Python = Brain, C# = Eyes
+
+**CRITICAL:** Python is the single source of truth for strategy logic
+
+**Python Responsibilities (Brain):**
+- Strategy evaluation (Trend Rider, Range Rider)
+- Indicator calculations (EMA, ATR, ADX, RSI)
+- Regime detection (TRENDING, RANGING, TRANSITIONAL)
+- Position management and trade generation
+- Complete backtest orchestration
+
+**C# Responsibilities (Eyes):**
+- User interface and configuration
+- Playback controls and visualization
+- Chart rendering with trade markers
+- Statistics display and reporting
+- Export functionality
+
+**Why This Matters:**
+- ✅ Single source of truth (no duplication)
+- ✅ Modify Python strategy → automatically affects backtest AND live signals
+- ✅ Faster development (one codebase, not three)
+- ✅ No risk of drift between Python, C#, and MQ5
 
 ### Two Git Repositories
 - **jcamp-python-backtesting:** Core engine, API server, strategies
@@ -337,12 +392,12 @@ JSON Response to C# WPF
 
 ### Branch Strategy
 - **main:** Stable, production-ready code
-- **phase7-csharp-strategies:** Active Phase 7B development
+- **phase7-csharp-strategies:** Completed Phase 7B (ready for merge)
 - **Merge Policy:** Only merge when session is complete and tested
 
-### C# Strategy Architecture
-- **Mirror MT5 EA v1.96 logic:** Keep regime detection identical
-- **Validation:** All indicators must match Python output within ±0.00001
+### Validation Strategy
+- **Signal Matching:** C# signals must match MT5 EA signals ≥ 90%
+- **Indicator Accuracy:** C# indicators must match Python within ±0.00001
 - **Confidence Scoring:** 135-point system for Trend Rider
 - **Performance:** Indicator caching for efficiency
 
@@ -365,12 +420,27 @@ JSON Response to C# WPF
 
 ## 🎯 PROJECT GOALS
 
+### Main Vision: Multi-Pair Backtesting System
+**Goal:** MT5 Strategy Tester reimagined with multi-pair support and realistic trading simulation
+
+**Phase 1 (Current Design):** Sequential Multi-Pair Testing
+- Test multiple pairs (EURUSD, GBPUSD, USDJPY, etc.) in single backtest
+- Python brain generates all trades, C# visualizes with MT5-style playback
+- Interactive timeline: click any trade to review that moment
+- Fast performance: 8-10 seconds for 1 year × 3 pairs
+
+**Phase 2 (Future Vision):** True Multi-Pair Orchestrator
+- Simultaneous bar-by-bar advancement across all pairs
+- Shared position limits (max 2 across ALL pairs, not per pair)
+- Signal priority resolution (when 2+ pairs signal at once)
+- Realistic trading simulation matching live trading conditions
+
 ### Technical Goals
 - ✅ 100-600x faster backtesting than MT5
 - ✅ Python API server with FastAPI
 - ✅ C# WPF chart viewer with smooth playback
-- 🔄 C# local strategy execution (Phase 7B)
-- ⏳ Multi-pair backtesting (Phase 6)
+- ✅ C# local strategy execution (Phase 7B COMPLETE)
+- 🚀 Multi-pair backtesting (Phase 8 - Design Complete, Implementation Next)
 
 ### Business Goals
 - **Target:** $5,000/month from 100 subscribers
@@ -433,14 +503,17 @@ JSON Response to C# WPF
 ## 🔗 QUICK REFERENCES
 
 ### Current Work
-- **Branch:** phase7-csharp-strategies
-- **Plan:** `/d/JcampFxTrading/plans/Phase_7B_C#StrategyMigrationImplementation_Plan.md`
-- **Next:** Implement IStrategy and TrendRiderStrategy classes
+- **Phase:** Phase 8 - Multi-Pair Backtesting
+- **Status:** Design Complete
+- **Design Doc:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
+- **Next Session:** Begin Phase 1 - Python API Enhancement
+- **Branch:** main (Phase 7B ready to merge)
 
 ### Important Files
-- **Python Strategies:** `/d/JcampFxTrading/jcamp-python-backtesting/src/strategies/`
-- **C# Indicators:** `/d/JcampFxTrading/CSMMonitor/JcampForexTrader/Models/Indicators/`
-- **C# Regime:** `/d/JcampFxTrading/CSMMonitor/JcampForexTrader/Models/RegimeDetector.cs`
+- **Multi-Pair Design:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
+- **Python API Routes:** `/d/JcampFxTrading/jcamp-python-backtesting/src/api/routes/backtest.py`
+- **Python Backtest Engine:** `/d/JcampFxTrading/jcamp-python-backtesting/src/backtest_engine.py`
+- **Python Position Manager:** `/d/JcampFxTrading/jcamp-python-backtesting/src/position_manager.py`
 
 ---
 *Read this file at the start of every Claude Code session for full context.*
