@@ -384,11 +384,27 @@ JSON Response to C# WPF
 - ✅ Faster development (one codebase, not three)
 - ✅ No risk of drift between Python, C#, and MQ5
 
-### Two Git Repositories
-- **jcamp-python-backtesting:** Core engine, API server, strategies
-- **CSMMonitor:** C# WPF chart viewer application
-- **Reason:** Independent versioning, separate deployment concerns
-- **Important:** Commit changes to both repos independently
+### Three Git Repositories
+
+**1. Root Project Repository (Documentation & Coordination)**
+- **GitHub:** https://github.com/JCAMPanero23/Jcamp_TradingApp
+- **Branch:** phase8-multi-pair-design
+- **Contains:** CLAUDE.md, Plans/, top-level documentation
+- **Purpose:** Project coordination, design documents, shared context
+
+**2. Python Backtesting Repository**
+- **GitHub:** https://github.com/JCAMPanero23/jcamp-python-backtesting
+- **Location:** `/d/JcampFxTrading/jcamp-python-backtesting/`
+- **Contains:** Core engine, API server, strategies, tests
+- **Purpose:** Python strategy brain, backtest engine
+
+**3. C# Monitor Repository**
+- **Location:** `/d/JcampFxTrading/CSMMonitor/`
+- **Contains:** C# WPF chart viewer application
+- **Purpose:** Visualization, UI, chart playback
+
+**Reason:** Independent versioning, separate deployment concerns
+**Important:** Commit changes to appropriate repos independently
 
 ### Branch Strategy
 - **main:** Stable, production-ready code
