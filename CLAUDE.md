@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** December 31, 2025 (Phase 8 - Multi-Pair Backtesting Design)
-**Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Design Complete - Ready for Implementation)
+**Last Updated:** January 3, 2026 (Phase 8.1 - Python API Enhancement Complete)
+**Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Phase 1 COMPLETE)
 
 ---
 
@@ -148,7 +148,7 @@ ls -la /d/JcampFxTrading/CSMMonitor/JcampForexTrader/Models/Indicators/
 | **Strategy UI** | ✅ Complete | Real-time signals, regime, indicators display (Session 3) |
 | **M1 Playback Fix** | ✅ Complete | UpdateStrategyPanel now called during M1 playback (Session 4 - Dec 12) |
 | **Indicator Display Fix** | ✅ Complete | Fixed UpdateChartInfo() overwrite issue (Session 5 - Dec 14) |
-| **Tests** | 30/31 Passing | 1 Phase 2 test failing |
+| **Tests** | 40/40 Passing | Multi-pair API tests passing |
 | **Main Branch** | ✅ Updated | Phase 5.2 & 5.3 Part 1 complete |
 | **Phase 7B Branch** | ✅ Complete | phase7-csharp-strategies (5 sessions complete) |
 
@@ -325,36 +325,6 @@ JSON Response to C# WPF
 - **Files:** 17 new C# files (~2,800 LOC)
 - **Status:** ✅ Complete, ready for merge to main
 
-### 🚀 Phase 8: Multi-Pair Backtesting (CURRENT)
-**Goal:** MT5-style multi-pair backtesting with interactive playback
-
-**Design Document:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
-
-**Implementation Phases:**
-- **Phase 1:** Python API Enhancement (2-3 days) - NEXT
-  - Add `/backtest/multi-pair` endpoint
-  - Multi-pair orchestration logic
-  - Statistics breakdown by pair/strategy
-
-- **Phase 2:** C# Configuration Window (2-3 days)
-  - Multi-pair/strategy selection UI
-  - Risk parameter inputs
-  - API integration
-
-- **Phase 3:** C# Playback Window (4-5 days)
-  - MT5-style playback controls
-  - Interactive trade timeline
-  - Multi-pair chart viewer
-
-- **Phase 4:** Export & Reporting (1-2 days)
-  - CSV trade export
-  - Statistics reports
-
-- **Phase 5:** Testing & Validation (2-3 days)
-  - Unit & integration tests
-  - Signal validation vs MT5 (≥90% match)
-
-**Total Timeline:** 12-16 days
 
 ---
 
@@ -533,4 +503,39 @@ JSON Response to C# WPF
 
 ---
 *Read this file at the start of every Claude Code session for full context.*
-- to memorize
+- to memorize### 🚀 Phase 8: Multi-Pair Backtesting (IN PROGRESS)
+**Goal:** MT5-style multi-pair backtesting with interactive playback
+
+**Status:** Phase 1 COMPLETE ✅
+
+**Phase 1: Python API Enhancement (COMPLETE)**
+- [x] Multi-pair request/response models
+- [x] `/backtest/multi-pair` endpoint
+- [x] Multi-pair orchestration logic
+- [x] Chronological trade merging
+- [x] Statistics breakdown (by pair, by strategy)
+- [x] Unit tests (10/10 passing)
+- [x] Integration testing complete
+- **Commits:** 422f50b (models), a006bce (service), 0c53926 (endpoint), 2b13787 (tests), 1c130f3 (docs)
+
+**Phase 2: C# Configuration Window (NEXT)**
+- Multi-pair/strategy selection UI
+- Risk parameter inputs
+- API integration
+
+**Phase 3: C# Playback Window**
+- MT5-style playback controls
+- Interactive trade timeline
+- Multi-pair chart viewer
+
+**Phase 4: Export & Reporting**
+- CSV trade export
+- Statistics reports
+
+**Phase 5: Testing & Validation**
+- Unit & integration tests
+- Signal validation vs MT5 (≥90% match)
+
+**Total Timeline:** 12-16 days (3 days complete, 9-13 remaining)
+
+---
