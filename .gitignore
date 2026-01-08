@@ -1,0 +1,19 @@
+# Claude Code cache
+.claude/
+
+# Temporary files
+nul
+*.backup
+
+# Windows shortcuts
+*.lnk
+
+# Debug output
+Debug/
+*.log
+
+# Temporary documentation
+*_COMPLETE.md
+*_STATUS.txt
+*_REPORT.txt
+*_SUMMARY.md

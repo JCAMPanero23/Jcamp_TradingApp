@@ -1,0 +1,6 @@
+[submodule "jcamp-python-backtesting"]
+	path = jcamp-python-backtesting
+	url = https://github.com/JCAMPanero23/jcamp-python-backtesting.git
+[submodule "CSMMonitor"]
+	path = CSMMonitor
+	url = https://github.com/JCAMPanero23/CSMMonitor.git
