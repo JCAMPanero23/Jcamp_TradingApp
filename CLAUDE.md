@@ -1,7 +1,7 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 3, 2026 (Phase 8.1 - Python API Enhancement Complete)
+**Last Updated:** January 9, 2026 (Monorepo Migration - Git Submodules)
 **Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Phase 1 COMPLETE)
 
 ---
@@ -85,16 +85,32 @@
 
 ## ⚙️ STANDARD COMMANDS
 
+### Initial Setup (First Time Only)
+```bash
+# Clone the entire project with all submodules
+git clone --recursive https://github.com/JCAMPanero23/Jcamp_TradingApp.git
+
+# If you already cloned without --recursive, initialize submodules:
+cd /d/JcampFxTrading
+git submodule update --init --recursive
+```
+
 ### Git Operations
 ```bash
-# Check Python backtest status
+# Check parent repo status
+cd /d/JcampFxTrading && git status
+
+# Check Python backtest status (submodule)
 cd /d/JcampFxTrading/jcamp-python-backtesting && git status
 
-# Check C# Monitor status
+# Check C# Monitor status (submodule)
 cd /d/JcampFxTrading/CSMMonitor && git status
 
 # View recent commits
 cd /d/JcampFxTrading/jcamp-python-backtesting && git log -3 --oneline
+
+# Update all submodules to latest remote commits
+cd /d/JcampFxTrading && git submodule update --remote --merge
 ```
 
 ### Python Testing
@@ -354,27 +370,42 @@ JSON Response to C# WPF
 - ✅ Faster development (one codebase, not three)
 - ✅ No risk of drift between Python, C#, and MQ5
 
-### Three Git Repositories
+### Monorepo with Git Submodules
 
-**1. Root Project Repository (Documentation & Coordination)**
+**Structure:** Single parent repo with two child repos as git submodules
+
+**Parent Repository (Jcamp_TradingApp)**
 - **GitHub:** https://github.com/JCAMPanero23/Jcamp_TradingApp
 - **Branch:** phase8-multi-pair-design
-- **Contains:** CLAUDE.md, Plans/, top-level documentation
-- **Purpose:** Project coordination, design documents, shared context
+- **Contains:** CLAUDE.md, Plans/, documentation, MT5 reference files, .gitmodules
+- **Purpose:** Project coordination, unified cloning, shared context
+- **Clone command:** `git clone --recursive https://github.com/JCAMPanero23/Jcamp_TradingApp.git`
 
-**2. Python Backtesting Repository**
+**Submodule 1: Python Backtesting Engine**
 - **GitHub:** https://github.com/JCAMPanero23/jcamp-python-backtesting
-- **Location:** `/d/JcampFxTrading/jcamp-python-backtesting/`
+- **Path:** `jcamp-python-backtesting/` (within parent repo)
 - **Contains:** Core engine, API server, strategies, tests
 - **Purpose:** Python strategy brain, backtest engine
+- **Independent history:** Maintains own git commits and branches
 
-**3. C# Monitor Repository**
-- **Location:** `/d/JcampFxTrading/CSMMonitor/`
+**Submodule 2: C# Monitor (WPF UI)**
+- **GitHub:** https://github.com/JCAMPanero23/CSMMonitor
+- **Path:** `CSMMonitor/` (within parent repo)
 - **Contains:** C# WPF chart viewer application
 - **Purpose:** Visualization, UI, chart playback
+- **Independent history:** Maintains own git commits and branches
 
-**Reason:** Independent versioning, separate deployment concerns
-**Important:** Commit changes to appropriate repos independently
+**Benefits:**
+- ✅ Single clone command gets entire project (`--recursive`)
+- ✅ Each component maintains independent git history
+- ✅ Easier remote development setup
+- ✅ Centralized documentation coordination
+- ✅ Can still commit to submodules independently
+
+**Workflow:**
+- Changes to Python/C# code: `cd` into submodule, commit & push normally
+- Changes to documentation: Commit in parent repo
+- Parent repo tracks specific submodule commits (version locking)
 
 ### Branch Strategy
 - **main:** Stable, production-ready code
