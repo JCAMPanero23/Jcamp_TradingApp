@@ -1,7 +1,7 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 9, 2026 (Phase 8.2 Multi-Pair UI Complete)
+**Last Updated:** January 9, 2026 (Path Update - Jcamp_TradingApp)
 **Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Phase 1 & 2 COMPLETE)
 
 ---
@@ -16,17 +16,17 @@
 **Git Bash paths (REQUIRED):**
 ```bash
 # Project root
-/d/JcampFxTrading/
+/d/Jcamp_TradingApp/
 
 # Sub-directories
-/d/JcampFxTrading/jcamp-python-backtesting/
-/d/JcampFxTrading/CSMMonitor/
-/d/JcampFxTrading/plans/
+/d/Jcamp_TradingApp/jcamp-python-backtesting/
+/d/Jcamp_TradingApp/CSMMonitor/
+/d/Jcamp_TradingApp/plans/
 ```
 
 **Conversion Rule:**
-- Windows: `D:\JcampFxTrading\folder` 
-- Git Bash: `/d/JcampFxTrading/folder` (lowercase drive letter, forward slashes)
+- Windows: `D:\Jcamp_TradingApp\folder` 
+- Git Bash: `/d/Jcamp_TradingApp/folder` (lowercase drive letter, forward slashes)
 
 **NEVER use:**
 - ❌ `D:\` (Windows backslash paths)
@@ -40,7 +40,7 @@
 ## 📁 PROJECT STRUCTURE
 
 ```
-/d/JcampFxTrading/
+/d/Jcamp_TradingApp/
 ├── CLAUDE.md                          # This file (startup context)
 ├── CURRENT_PLANS.md                   # Active development plans
 ├── STATUS.md                          # Dynamic status tracking
@@ -101,13 +101,13 @@ git submodule update --init --recursive
 cd /d/JcampFxTrading && git status
 
 # Check Python backtest status (submodule)
-cd /d/JcampFxTrading/jcamp-python-backtesting && git status
+cd /d/Jcamp_TradingApp/jcamp-python-backtesting && git status
 
 # Check C# Monitor status (submodule)
-cd /d/JcampFxTrading/CSMMonitor && git status
+cd /d/Jcamp_TradingApp/CSMMonitor && git status
 
 # View recent commits
-cd /d/JcampFxTrading/jcamp-python-backtesting && git log -3 --oneline
+cd /d/Jcamp_TradingApp/jcamp-python-backtesting && git log -3 --oneline
 
 # Update all submodules to latest remote commits
 cd /d/JcampFxTrading && git submodule update --remote --merge
@@ -116,37 +116,37 @@ cd /d/JcampFxTrading && git submodule update --remote --merge
 ### Python Testing
 ```bash
 # Run all tests
-cd /d/JcampFxTrading/jcamp-python-backtesting && python -m pytest tests/ -v
+cd /d/Jcamp_TradingApp/jcamp-python-backtesting && python -m pytest tests/ -v
 
 # Run specific phase tests
-cd /d/JcampFxTrading/jcamp-python-backtesting && python -m pytest tests/test_phase4.py -v
+cd /d/Jcamp_TradingApp/jcamp-python-backtesting && python -m pytest tests/test_phase4.py -v
 ```
 
 ### API Server
 ```bash
 # Start FastAPI server
-cd /d/JcampFxTrading/jcamp-python-backtesting && python -m uvicorn src.api.main:app --reload
+cd /d/Jcamp_TradingApp/jcamp-python-backtesting && python -m uvicorn src.api.main:app --reload
 ```
 
 ### C# Project
 ```bash
 # Build C# project
-cd /d/JcampFxTrading/CSMMonitor && dotnet build
+cd /d/Jcamp_TradingApp/CSMMonitor && dotnet build
 
 # Run C# tests (when implemented)
-cd /d/JcampFxTrading/CSMMonitor && dotnet test
+cd /d/Jcamp_TradingApp/CSMMonitor && dotnet test
 ```
 
 ### File Viewing
 ```bash
 # View plan files
-cat /d/JcampFxTrading/plans/Phase_7B_C#StrategyMigrationImplementation_Plan.md
+cat /d/Jcamp_TradingApp/plans/Phase_7B_C#StrategyMigrationImplementation_Plan.md
 
 # View CURRENT_PLANS.md
-cat /d/JcampFxTrading/CURRENT_PLANS.md
+cat /d/Jcamp_TradingApp/CURRENT_PLANS.md
 
 # List C# indicators
-ls -la /d/JcampFxTrading/CSMMonitor/JcampForexTrader/Models/Indicators/
+ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 ```
 
 ---
@@ -175,7 +175,7 @@ ls -la /d/JcampFxTrading/CSMMonitor/JcampForexTrader/Models/Indicators/
 
 **Phase 8 Status:** ✅ **DESIGN COMPLETE** - Ready for Implementation
 
-**Design Document:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
+**Design Document:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 
 **Core Vision:** MT5 Strategy Tester reimagined with multi-pair support and realistic trading simulation
 
@@ -466,7 +466,7 @@ JSON Response to C# WPF
 - **archive/** folder - Old session summaries
 - ~~`C:\Users\jcamp\.claude\plans\`~~ - DEPRECATED, don't use
 
-**Single Source of Truth:** `/d/JcampFxTrading/CURRENT_PLANS.md`
+**Single Source of Truth:** `/d/Jcamp_TradingApp/CURRENT_PLANS.md`
 
 ---
 
@@ -557,15 +557,15 @@ JSON Response to C# WPF
 ### Current Work
 - **Phase:** Phase 8 - Multi-Pair Backtesting
 - **Status:** Design Complete
-- **Design Doc:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
+- **Design Doc:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 - **Next Session:** Begin Phase 1 - Python API Enhancement
 - **Branch:** main (Phase 7B ready to merge)
 
 ### Important Files
-- **Multi-Pair Design:** `/d/JcampFxTrading/Plans/2025-12-31-MultiPair-Backtest-Design.md`
-- **Python API Routes:** `/d/JcampFxTrading/jcamp-python-backtesting/src/api/routes/backtest.py`
-- **Python Backtest Engine:** `/d/JcampFxTrading/jcamp-python-backtesting/src/backtest_engine.py`
-- **Python Position Manager:** `/d/JcampFxTrading/jcamp-python-backtesting/src/position_manager.py`
+- **Multi-Pair Design:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
+- **Python API Routes:** `/d/Jcamp_TradingApp/jcamp-python-backtesting/src/api/routes/backtest.py`
+- **Python Backtest Engine:** `/d/Jcamp_TradingApp/jcamp-python-backtesting/src/backtest_engine.py`
+- **Python Position Manager:** `/d/Jcamp_TradingApp/jcamp-python-backtesting/src/position_manager.py`
 
 ---
 *Read this file at the start of every Claude Code session for full context.*
