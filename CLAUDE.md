@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 9, 2026 (Path Update - Jcamp_TradingApp)
-**Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Phase 1 & 2 COMPLETE)
+**Last Updated:** January 11, 2026 (Phase 8.1 Complete + Strategy Selection Bugfix)
+**Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Phase 8.1 COMPLETE ✅)
 
 ---
 
@@ -164,16 +164,16 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 | **Strategy UI** | ✅ Complete | Real-time signals, regime, indicators display (Session 3) |
 | **M1 Playback Fix** | ✅ Complete | UpdateStrategyPanel now called during M1 playback (Session 4 - Dec 12) |
 | **Indicator Display Fix** | ✅ Complete | Fixed UpdateChartInfo() overwrite issue (Session 5 - Dec 14) |
-| **Phase 8.1 - Python API** | ✅ Complete | Multi-pair endpoint, 40/40 tests passing |
+| **Phase 8.1 - Python API** | ✅ Complete | Multi-pair endpoint, strategy selection FIXED, 10/10 tests passing |
 | **Phase 8.2 - C# Multi-Pair UI** | ✅ Complete | BacktestWindow + ChartViewer multi-pair support (5 commits) |
 | **Main Branch** | ✅ Updated | Phase 5.2 & 5.3 Part 1 complete |
 | **Phase 7B Branch** | ✅ Complete | phase7-csharp-strategies (5 sessions complete) |
 
 ---
 
-## 🎯 CURRENT FOCUS: PHASE 8 - MULTI-PAIR BACKTESTING DESIGN ✅
+## 🎯 CURRENT FOCUS: PHASE 8 - MULTI-PAIR BACKTESTING
 
-**Phase 8 Status:** ✅ **DESIGN COMPLETE** - Ready for Implementation
+**Phase 8 Status:** Phase 8.1 ✅ COMPLETE | Phase 8.2 ✅ COMPLETE | Phase 8.3 → NEXT
 
 **Design Document:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 
@@ -204,6 +204,43 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 ---
 
 ## 🚀 RECENT MILESTONES
+
+### ✅ Phase 8.1 - PYTHON MULTI-PAIR API COMPLETE + BUGFIX (Jan 11, 2026)
+**Branch:** main (jcamp-python-backtesting submodule)
+**Commits:** 5 commits (614d7d7 → fa82f5c)
+**Files Modified:** models/requests.py, models/responses.py, services/backtest_service.py, routes/backtest.py, backtest_engine.py
+**Total Changes:** ~547 LOC added for Phase 8.1, ~35 LOC modified for bugfix
+
+**Components Implemented:**
+1. **Multi-Pair Request/Response Models** (commit 614d7d7)
+   - `MultiPairBacktestRequest` with pair & strategy validation
+   - `MultiPairBacktestResults` with complete breakdown structure
+   - `PairStatistics`, `StrategyStatistics`, `ChartData` models
+
+2. **Multi-Pair Backtest Service** (commit 928deb8)
+   - Parallel backtest execution across multiple pairs
+   - Chronological trade merging across pairs
+   - Per-pair and per-strategy statistics calculation
+   - Unified equity curve generation
+
+3. **Multi-Pair API Endpoint** (commit 2e444cc)
+   - `POST /api/v1/backtest/multi-pair` - Queue multi-pair backtest
+   - `GET /api/v1/backtest/multi-pair/{task_id}/results` - Retrieve results
+   - Async task management with progress tracking
+
+4. **Unit Tests** (commit 292a409)
+   - 10/10 tests passing (100%)
+   - Model validation, service logic, chronological sorting tests
+
+5. **CRITICAL BUGFIX: Strategy Selection** (commit fa82f5c)
+   - **Problem:** Multi-pair backtest ignored `strategies` parameter, always used SIMPLE_TEST
+   - **Solution:**
+     - Added `strategies` parameter to `BacktestEngine.run_backtest()`
+     - Removed SIMPLE_TEST from production evaluation
+     - Updated service to pass strategies to engine
+   - **Verification:** 1,946 RANGE_RIDER trades generated, `strategy_breakdown` populated correctly
+
+**Key Achievement:** Multi-pair backtesting API fully functional with working strategy selection. Ready for Phase 8.3 (C# Playback Window).
 
 ### ✅ Phase 8.2 - C# MULTI-PAIR UI COMPLETE (Jan 9, 2026)
 **Branch:** phase8.2-multi-pair-ui (CSMMonitor submodule)
@@ -582,7 +619,8 @@ JSON Response to C# WPF
 - [x] Statistics breakdown (by pair, by strategy)
 - [x] Unit tests (10/10 passing)
 - [x] Integration testing complete
-- **Commits:** 422f50b (models), a006bce (service), 0c53926 (endpoint), 2b13787 (tests), 1c130f3 (docs)
+- [x] **BUGFIX:** Strategy selection working (removed SIMPLE_TEST, added strategies param)
+- **Commits:** 614d7d7 (models), 928deb8 (service), 2e444cc (endpoint), 292a409 (tests), fa82f5c (bugfix)
 
 **Phase 2: C# Configuration Window (COMPLETE ✅)**
 - [x] Multi-pair selection UI (checkbox list)
