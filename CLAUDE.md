@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 11, 2026 (Phase 8.1 Complete + Strategy Selection Bugfix)
-**Current Phase:** 🚀 PHASE 8 - MULTI-PAIR BACKTESTING (Phase 8.1 COMPLETE ✅)
+**Last Updated:** January 11, 2026 (Phase 8.3 Complete - Multi-Pair Playback)
+**Current Phase:** 🚀 PHASE 8.5 - TESTING & VALIDATION
 
 ---
 
@@ -166,6 +166,9 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 | **Indicator Display Fix** | ✅ Complete | Fixed UpdateChartInfo() overwrite issue (Session 5 - Dec 14) |
 | **Phase 8.1 - Python API** | ✅ Complete | Multi-pair endpoint, strategy selection FIXED, 10/10 tests passing |
 | **Phase 8.2 - C# Multi-Pair UI** | ✅ Complete | BacktestWindow + ChartViewer multi-pair support (5 commits) |
+| **Phase 8.3 - C# Playback** | ✅ Complete | Global timeline playback + visual trade timeline (2 commits, ~402 LOC) |
+| **Phase 8.4 - Export** | ⏸️ Postponed | CSV export and reporting deferred to later |
+| **Phase 8.5 - Testing** | 🔄 In Progress | Current phase - validation and testing |
 | **Main Branch** | ✅ Updated | Phase 5.2 & 5.3 Part 1 complete |
 | **Phase 7B Branch** | ✅ Complete | phase7-csharp-strategies (5 sessions complete) |
 
@@ -173,7 +176,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 
 ## 🎯 CURRENT FOCUS: PHASE 8 - MULTI-PAIR BACKTESTING
 
-**Phase 8 Status:** Phase 8.1 ✅ COMPLETE | Phase 8.2 ✅ COMPLETE | Phase 8.3 → NEXT
+**Phase 8 Status:** Phase 8.1 ✅ | Phase 8.2 ✅ | Phase 8.3 ✅ | Phase 8.4 ⏸️ POSTPONED | Phase 8.5 🔄 IN PROGRESS
 
 **Design Document:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 
@@ -192,14 +195,14 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 - ✅ Export functionality (CSV, reports, configurations)
 - ✅ Fast load times (~8-10 seconds for 1 year × 3 pairs)
 
-**Implementation Roadmap:** 5 Phases, 12-16 days
-- Phase 1: Python API Enhancement (2-3 days)
-- Phase 2: C# Configuration Window (2-3 days)
-- Phase 3: C# Playback Window (4-5 days)
-- Phase 4: Export & Reporting (1-2 days)
-- Phase 5: Testing & Validation (2-3 days)
+**Implementation Roadmap:** 5 Phases
+- Phase 8.1: Python API Enhancement ✅ COMPLETE
+- Phase 8.2: C# Configuration Window ✅ COMPLETE
+- Phase 8.3: C# Playback Window ✅ COMPLETE
+- Phase 8.4: Export & Reporting ⏸️ POSTPONED
+- Phase 8.5: Testing & Validation 🔄 IN PROGRESS
 
-**Next Session:** Begin Phase 1 - Python API Enhancement
+**Current Session:** Phase 8.5 - Testing & Validation
 
 ---
 
@@ -275,6 +278,35 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
    - Preparation for Phase 8.3
 
 **Key Achievement:** BacktestWindow can now launch multi-pair backtests and ChartViewerWindow handles multi-pair data
+
+### ✅ Phase 8.3 - C# PLAYBACK WINDOW COMPLETE (Jan 9, 2026)
+**Branch:** main (CSMMonitor submodule)
+**Commits:** 2 commits (48b1bb4 → 8edff3f)
+**Files Modified:** ChartViewerWindow.xaml, ChartViewerWindow.xaml.cs
+**Total Changes:** ~402 LOC added
+
+**Components Implemented:**
+1. **Multi-Pair Global Timeline Playback** (commit 48b1bb4)
+   - Chronological playback across all pairs
+   - AdvanceGlobalTimeline() to map global timestamps to pair bars
+   - CheckAndSwitchPairForTradeEvents() for auto-switching pairs
+   - ReplayTradesUpToGlobalTime() for statistics calculation
+   - Updated PlaybackTimer_Tick to use global timeline
+   - Progress slider maps to global timeline count
+   - Synchronized position maintenance across pairs
+   - ~161 insertions
+
+2. **Visual Trade Timeline** (commit 8edff3f)
+   - 60px interactive canvas below progress slider
+   - Color-coded trade markers (Blue=EURUSD, Orange=GBPUSD, Purple=USDJPY)
+   - Entry bars (60% height) vs Exit bars (40% height)
+   - Yellow position indicator line showing current playback location
+   - Click-to-jump navigation (click anywhere on timeline)
+   - Tooltips showing trade details on hover
+   - Automatic re-render on window resize
+   - ~241 insertions
+
+**Key Achievement:** MT5-style playback with interactive visual timeline complete. Multi-pair backtesting UI fully functional.
 
 ### ✅ Phase 7B Session 5 - INDICATOR DISPLAY FIX (Dec 14, 2025)
 **Commit:** d29dd71 (phase7-csharp-strategies)
@@ -592,11 +624,12 @@ JSON Response to C# WPF
 ## 🔗 QUICK REFERENCES
 
 ### Current Work
-- **Phase:** Phase 8 - Multi-Pair Backtesting
-- **Status:** Design Complete
+- **Phase:** Phase 8.5 - Testing & Validation
+- **Status:** In Progress
+- **Completed:** Phases 8.1, 8.2, 8.3 ✅
+- **Postponed:** Phase 8.4 (Export & Reporting)
 - **Design Doc:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
-- **Next Session:** Begin Phase 1 - Python API Enhancement
-- **Branch:** main (Phase 7B ready to merge)
+- **Branch:** phase8.2-multi-pair-ui (ready to merge to main)
 
 ### Important Files
 - **Multi-Pair Design:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
@@ -606,12 +639,12 @@ JSON Response to C# WPF
 
 ---
 *Read this file at the start of every Claude Code session for full context.*
-- to memorize### 🚀 Phase 8: Multi-Pair Backtesting (IN PROGRESS)
+- to memorize### 🚀 Phase 8: Multi-Pair Backtesting
 **Goal:** MT5-style multi-pair backtesting with interactive playback
 
-**Status:** Phases 1 & 2 COMPLETE ✅
+**Status:** Phases 8.1, 8.2, 8.3 COMPLETE ✅ | Phase 8.4 POSTPONED ⏸️ | Phase 8.5 IN PROGRESS 🔄
 
-**Phase 1: Python API Enhancement (COMPLETE ✅)**
+**Phase 8.1: Python API Enhancement (COMPLETE ✅)**
 - [x] Multi-pair request/response models
 - [x] `/backtest/multi-pair` endpoint
 - [x] Multi-pair orchestration logic
@@ -622,7 +655,7 @@ JSON Response to C# WPF
 - [x] **BUGFIX:** Strategy selection working (removed SIMPLE_TEST, added strategies param)
 - **Commits:** 614d7d7 (models), 928deb8 (service), 2e444cc (endpoint), 292a409 (tests), fa82f5c (bugfix)
 
-**Phase 2: C# Configuration Window (COMPLETE ✅)**
+**Phase 8.2: C# Configuration Window (COMPLETE ✅)**
 - [x] Multi-pair selection UI (checkbox list)
 - [x] Multi-strategy selection (Trend Rider, Range Rider, Both)
 - [x] Risk parameter inputs
@@ -630,23 +663,26 @@ JSON Response to C# WPF
 - [x] Multi-pair data structures in ChartViewerWindow
 - [x] Recent Trades list multi-pair support
 - [x] Open Positions clickable slots with auto-switch
-- [x] Global Timeline foundation (WIP)
+- [x] Global Timeline foundation
 - **Commits:** 759ed0e, c0c356c, 1ff3e1b, 52f7cf8, 9912eef (~693 LOC)
 
-**Phase 3: C# Playback Window (NEXT)**
-- MT5-style playback controls
-- Interactive trade timeline
-- Multi-pair chart viewer
-- Global timeline playback
+**Phase 8.3: C# Playback Window (COMPLETE ✅)**
+- [x] MT5-style playback controls with global timeline
+- [x] Interactive trade timeline (click-to-jump navigation)
+- [x] Multi-pair chart viewer with auto-switching
+- [x] Global timeline playback (chronological across pairs)
+- [x] Visual trade markers (color-coded by pair)
+- [x] Position indicator line during playback
+- **Commits:** 48b1bb4 (global timeline), 8edff3f (visual timeline) (~402 LOC)
 
-**Phase 4: Export & Reporting**
-- CSV trade export
-- Statistics reports
+**Phase 8.4: Export & Reporting (POSTPONED ⏸️)**
+- CSV trade export (deferred)
+- Statistics reports (deferred)
 
-**Phase 5: Testing & Validation**
-- Unit & integration tests
-- Signal validation vs MT5 (≥90% match)
-
-**Total Timeline:** 12-16 days (6 days complete, 6-10 remaining)
+**Phase 8.5: Testing & Validation (IN PROGRESS 🔄)**
+- End-to-end testing
+- Multi-pair playback validation
+- Trade statistics verification
+- Performance testing
 
 ---
