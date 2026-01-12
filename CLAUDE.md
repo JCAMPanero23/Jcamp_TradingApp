@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 11, 2026 (Phase 8.3 Complete - Multi-Pair Playback)
-**Current Phase:** 🚀 PHASE 8.5 - TESTING & VALIDATION
+**Last Updated:** January 12, 2026 (Phase 8.5 Bug Fixes - Pair Tab Selection & Strategy Breakdown)
+**Current Phase:** 🚀 PHASE 8.5 - TESTING & VALIDATION (3 Bugs Fixed ✅, 3 Deferred to Phase 8.6)
 
 ---
 
@@ -244,6 +244,52 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
    - **Verification:** 1,946 RANGE_RIDER trades generated, `strategy_breakdown` populated correctly
 
 **Key Achievement:** Multi-pair backtesting API fully functional with working strategy selection. Ready for Phase 8.3 (C# Playback Window).
+
+### ✅ Phase 8.5 - BUG FIXES (Jan 12, 2026)
+**Branch:** phase8.2-multi-pair-ui (CSMMonitor submodule)
+**Files Modified:** ChartViewerWindow.xaml, ChartViewerWindow.xaml.cs, BacktestWindow.xaml.cs
+**Total Changes:** ~30 LOC added/modified
+**Deferred Bugs:** 3 documented in PHASE_8_DEFERRED_BUGS.md
+
+**Bugs Fixed:**
+1. **BUG1: Pair Tab Selection Not Working**
+   - **Problem:** Both chart tabs labeled "EURUSD", clicking tabs didn't switch pairs
+   - **Root Cause:** XAML TabControl had no SelectionChanged event handler
+   - **Solution:**
+     - Added `SelectionChanged="PairTabControl_SelectionChanged"` to TabControl
+     - Implemented event handler that calls `SwitchToPairTab()` with selected pair name
+   - **Files:** ChartViewerWindow.xaml (line 304), ChartViewerWindow.xaml.cs (+15 LOC)
+   - **Result:** Users can now click EURUSD/GBPUSD tabs to switch between pair charts
+
+2. **BUG3: Strategy Breakdown Showing "No trades"**
+   - **Problem:** Strategy Breakdown displayed "No trades" for both strategies despite 1,946 trades
+   - **Root Cause:** C# looked for lowercase keys ("trend_rider") but Python API returns uppercase ("TREND_RIDER")
+   - **Solution:**
+     - Changed `results.StrategyBreakdown.ContainsKey("trend_rider")` → `"TREND_RIDER"`
+     - Changed `results.StrategyBreakdown.ContainsKey("range_rider")` → `"RANGE_RIDER"`
+   - **Files:** BacktestWindow.xaml.cs (lines 299-319)
+   - **Result:** Strategy breakdown now displays correct trade counts and statistics
+
+**Deferred Bugs (Phase 8.6):**
+3. **BUG2: Max Concurrent Positions Not Respected**
+   - **Issue:** 5 open positions when max=2
+   - **Root Cause:** Each pair gets separate PositionManager with independent limits
+   - **Required Fix:** Implement shared GlobalPositionManager across all pairs
+   - **Effort:** 4-6 hours (architectural change)
+
+4. **BUG4: Excessive Trade Count (1,946 trades/month)**
+   - **Issue:** Too many trades for 1 month period
+   - **Root Cause:** RANGE_RIDER strategy too aggressive
+   - **Required Fix:** Tune strategy parameters (min_confidence, range width, cooldown)
+   - **Effort:** 2-3 hours (parameter tuning + validation)
+
+5. **BUG5: Excessive Horizontal Lines on Chart**
+   - **Issue:** SL/TP lines not removed when positions close
+   - **Root Cause:** Lines added but never cleaned up
+   - **Required Fix:** Remove lines from chart when positions close
+   - **Effort:** 1-2 hours (simple cleanup logic)
+
+**Key Achievement:** Critical UI bugs fixed, multi-pair chart viewer fully functional. Non-critical bugs documented for Phase 8.6.
 
 ### ✅ Phase 8.2 - C# MULTI-PAIR UI COMPLETE (Jan 9, 2026)
 **Branch:** phase8.2-multi-pair-ui (CSMMonitor submodule)
