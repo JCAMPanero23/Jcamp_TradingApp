@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 12, 2026 (Phase 8.5 Bug Fixes - Pair Tab Selection & Strategy Breakdown)
-**Current Phase:** 🚀 PHASE 8.5 - TESTING & VALIDATION (3 Bugs Fixed ✅, 3 Deferred to Phase 8.6)
+**Last Updated:** January 14, 2026 (Phase 8.5 Comprehensive Testing - 5 Critical Bugs Documented)
+**Current Phase:** 🚀 PHASE 8.5 - TESTING & VALIDATION (Comprehensive Test Complete - Major Rework Needed)
 
 ---
 
@@ -168,7 +168,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 | **Phase 8.2 - C# Multi-Pair UI** | ✅ Complete | BacktestWindow + ChartViewer multi-pair support (5 commits) |
 | **Phase 8.3 - C# Playback** | ✅ Complete | Global timeline playback + visual trade timeline (2 commits, ~402 LOC) |
 | **Phase 8.4 - Export** | ⏸️ Postponed | CSV export and reporting deferred to later |
-| **Phase 8.5 - Testing** | 🔄 In Progress | Current phase - validation and testing |
+| **Phase 8.5 - Testing** | 🔴 Major Issues Found | 5 critical bugs identified in 5-hour comprehensive test (Jan 13-14) |
 | **Main Branch** | ✅ Updated | Phase 5.2 & 5.3 Part 1 complete |
 | **Phase 7B Branch** | ✅ Complete | phase7-csharp-strategies (5 sessions complete) |
 
@@ -176,7 +176,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 
 ## 🎯 CURRENT FOCUS: PHASE 8 - MULTI-PAIR BACKTESTING
 
-**Phase 8 Status:** Phase 8.1 ✅ | Phase 8.2 ✅ | Phase 8.3 ✅ | Phase 8.4 ⏸️ POSTPONED | Phase 8.5 🔄 IN PROGRESS
+**Phase 8 Status:** Phase 8.1 ✅ | Phase 8.2 ✅ | Phase 8.3 ✅ | Phase 8.4 ⏸️ POSTPONED | Phase 8.5 🔴 MAJOR ISSUES FOUND
 
 **Design Document:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 
@@ -200,9 +200,9 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 - Phase 8.2: C# Configuration Window ✅ COMPLETE
 - Phase 8.3: C# Playback Window ✅ COMPLETE
 - Phase 8.4: Export & Reporting ⏸️ POSTPONED
-- Phase 8.5: Testing & Validation 🔄 IN PROGRESS
+- Phase 8.5: Testing & Validation 🔴 MAJOR ISSUES FOUND
 
-**Current Session:** Phase 8.5 - Testing & Validation
+**Current Session:** Phase 8.5 - Bug Fixing (5 critical bugs from comprehensive test)
 
 ---
 
@@ -290,6 +290,74 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
    - **Effort:** 1-2 hours (simple cleanup logic)
 
 **Key Achievement:** Critical UI bugs fixed, multi-pair chart viewer fully functional. Non-critical bugs documented for Phase 8.6.
+
+### 🔴 Phase 8.5 - COMPREHENSIVE TEST RESULTS (Jan 13-14, 2026)
+**Branch:** phase8.2-multi-pair-ui
+**Commit:** 3c14535 (test results documentation)
+**Test Duration:** 5 hours
+**Test Configuration:** EURUSD + GBPUSD, Both Strategies, Jan 2-31, 2024
+**Overall Assessment:** ⚠️ **MAJOR REWORK NEEDED**
+
+**Critical Bugs Found (Priority 1):**
+
+1. **BUG #1: M1 Data Not Loading for Multi-Pair**
+   - **Severity:** Critical
+   - **Issue:** Single pair loads M1 correctly, multi-pair only loads M15 (candles move every 15min)
+   - **Impact:** After multi-pair test, even single pair breaks until server reset
+   - **Component:** Python backtest engine / C# data loading
+
+2. **BUG #2: Sequential Pair Loading (Not Parallel)**
+   - **Severity:** Critical
+   - **Issue:** Python loads pairs one at a time instead of parallel execution
+   - **Impact:** Position slot management incorrect, doesn't simulate realistic live trading
+   - **Component:** Python backtest service
+   - **Evidence:** See Phase8 test log.txt in debug folder
+
+3. **BUG #4: Broken Strategy Logic**
+   - **Severity:** Critical/Major
+   - **Issues:**
+     - Entries occurring every 15 minutes (unrealistic)
+     - Regime detection not working (stuck on RANGE_RIDER only)
+     - No TREND_RIDER trades despite selecting "Both Strategies"
+     - Strategy signals panel not functioning
+   - **Component:** Python strategy evaluation
+
+4. **BUG #5: Position Limits Not Respected**
+   - **Severity:** Critical/Major
+   - **Issue:** Max concurrent positions (2) not respected in multi-pair mode
+   - **Impact:** R-multiples showing 100+ (calculation error), 5 positions when max=2
+   - **Works Correctly:** Single pair mode
+   - **Component:** Python position manager
+
+**Major/Minor Issues (Priority 2):**
+
+5. **BUG #3: Viewport & Header Mismatch**
+   - **Severity:** Minor
+   - **Issues:**
+     - Viewport doesn't follow current candle when switching pairs
+     - Header pair names don't match selected tab
+     - Recent trades selection doesn't zoom to exact candles
+   - **Evidence:** See "Recent trades selections bug.png" and "Header pairs name bug.png"
+
+**Additional Observations:**
+- SL/TP horizontal lines not removed after trade close (chart clutter)
+- Visual trade timeline not showing on single pair backtests
+- Strategy signals panel completely non-functional
+- 1,900+ trades in 1 month (excessive, strategy too aggressive)
+- Load time: 1m 50s for 1-month multi-pair backtest (slower than expected ~8-10s target)
+
+**Data Accuracy Issues:**
+- All Data Accuracy tests FAILED
+- Strategy breakdown showing incorrect values
+- Trade counts unreasonable
+- Position management calculations incorrect
+
+**Next Session Priorities:**
+1. **Priority 1 (Must Fix):** BUG #2 (parallel loading), BUG #1 (M1 data)
+2. **Priority 2 (Should Fix):** Strategy signal fixes, regime detection, cosmetics
+3. **Deferred to Phase 8.6:** Final strategy logic, equity curve
+
+**Key Achievement:** Comprehensive 5-hour test identified 5 critical bugs requiring major rework before Phase 8 can be considered complete. Test results fully documented in PHASE_8_TEST_RESULTS.md.
 
 ### ✅ Phase 8.2 - C# MULTI-PAIR UI COMPLETE (Jan 9, 2026)
 **Branch:** phase8.2-multi-pair-ui (CSMMonitor submodule)
