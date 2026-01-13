@@ -1,0 +1,55 @@
+{
+  "task_id": "343c1189-e97c-430e-8c08-342fd206cbdc",
+  "pairs": [
+    "EURUSD",
+    "GBPUSD"
+  ],
+  "strategies": [
+    "trend_rider",
+    "range_rider"
+  ],
+  "start_date": "2024-01-01",
+  "end_date": "2024-01-31",
+  "timeframe": "M15",
+  "trades": [],
+  "statistics": {
+    "total_trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "total_r": 0.0,
+    "avg_r": 0.0,
+    "max_r": 0.0,
+    "min_r": 0.0,
+    "max_drawdown": 0.0,
+    "max_drawdown_pct": 0.0,
+    "sharpe_ratio": 0.0,
+    "initial_balance": 10000.0,
+    "final_balance": 10000.0,
+    "net_profit": 0.0,
+    "return_percent": 0.0
+  },
+  "equity_curve": [],
+  "pair_breakdown": {
+    "EURUSD": {
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "total_r": 0.0,
+      "avg_r": 0.0,
+      "net_profit": 0.0
+    },
+    "GBPUSD": {
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "total_r": 0.0,
+      "avg_r": 0.0,
+      "net_profit": 0.0
+    }
+  },
+  "strategy_breakdown": {},
+  "pair_chart_data": {}
+}
