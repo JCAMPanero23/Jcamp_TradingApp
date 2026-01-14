@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 14, 2026 (Phase 8.5 Comprehensive Testing - 5 Critical Bugs Documented)
-**Current Phase:** 🚀 PHASE 8.5 - TESTING & VALIDATION (Comprehensive Test Complete - Major Rework Needed)
+**Last Updated:** January 14, 2026 (Phase 8.5 Testing Complete - Validation FAILED - 5 Critical Bugs Found)
+**Current Phase:** 🔴 PHASE 8.5 - VALIDATION FAILED → PHASE 8.6 BUG FIXES REQUIRED
 
 ---
 
@@ -168,7 +168,8 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 | **Phase 8.2 - C# Multi-Pair UI** | ✅ Complete | BacktestWindow + ChartViewer multi-pair support (5 commits) |
 | **Phase 8.3 - C# Playback** | ✅ Complete | Global timeline playback + visual trade timeline (2 commits, ~402 LOC) |
 | **Phase 8.4 - Export** | ⏸️ Postponed | CSV export and reporting deferred to later |
-| **Phase 8.5 - Testing** | 🔴 Major Issues Found | 5 critical bugs identified in 5-hour comprehensive test (Jan 13-14) |
+| **Phase 8.5 - Testing** | 🔴 FAILED | Testing complete, validation FAILED - 5 critical bugs block production use |
+| **Phase 8.6 - Bug Fixes** | 🟡 Required | Implementation guide ready, 3 UI fixes + 5 backend fixes (32-40 hours) |
 | **Main Branch** | ✅ Updated | Phase 5.2 & 5.3 Part 1 complete |
 | **Phase 7B Branch** | ✅ Complete | phase7-csharp-strategies (5 sessions complete) |
 
@@ -176,7 +177,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 
 ## 🎯 CURRENT FOCUS: PHASE 8 - MULTI-PAIR BACKTESTING
 
-**Phase 8 Status:** Phase 8.1 ✅ | Phase 8.2 ✅ | Phase 8.3 ✅ | Phase 8.4 ⏸️ POSTPONED | Phase 8.5 🔴 MAJOR ISSUES FOUND
+**Phase 8 Status:** Phase 8.1 ✅ | Phase 8.2 ✅ | Phase 8.3 ✅ | Phase 8.4 ⏸️ | Phase 8.5 🔴 FAILED | Phase 8.6 🟡 FIXING
 
 **Design Document:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 
@@ -200,9 +201,12 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 - Phase 8.2: C# Configuration Window ✅ COMPLETE
 - Phase 8.3: C# Playback Window ✅ COMPLETE
 - Phase 8.4: Export & Reporting ⏸️ POSTPONED
-- Phase 8.5: Testing & Validation 🔴 MAJOR ISSUES FOUND
+- Phase 8.5: Testing & Validation 🔴 FAILED (5 critical bugs found)
+- Phase 8.6: Bug Fixes & Refinements 🟡 IN PROGRESS (32-40 hours estimated)
 
-**Current Session:** Phase 8.5 - Bug Fixing (5 critical bugs from comprehensive test)
+**Current Session:** Phase 8.5 validation FAILED - 5 critical bugs identified - Phase 8.6 fixes required before production use
+
+**Implementation Guide:** `/d/Jcamp_TradingApp/Debug/PHASE_8_6_UI_FIXES.md`
 
 ---
 
@@ -358,6 +362,58 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 3. **Deferred to Phase 8.6:** Final strategy logic, equity curve
 
 **Key Achievement:** Comprehensive 5-hour test identified 5 critical bugs requiring major rework before Phase 8 can be considered complete. Test results fully documented in PHASE_8_TEST_RESULTS.md.
+
+### ✅ Phase 8.6 - IMPLEMENTATION GUIDES READY (Jan 14, 2026)
+**Branch:** phase8.2-multi-pair-ui
+**Status:** Analysis Complete, Ready for Implementation
+**Documentation:** `/d/Jcamp_TradingApp/Debug/PHASE_8_6_UI_FIXES.md`
+
+**Bugs Analyzed & Solutions Designed:**
+
+**UI Fixes (5-8 hours):**
+1. **BUG #6: UI Text Contrast** - Calendar and tab text hard to read on dark theme
+   - Solution: Enhanced calendar styles with proper foreground/background colors
+   - Files: BacktestWindow.xaml, ChartViewerWindow.xaml
+
+2. **BUG #7: Dynamic Pair Tabs** - Hardcoded USDJPY tab shows even when not selected
+   - Solution: Implement GeneratePairTabs() to create tabs dynamically from selected pairs
+   - Files: ChartViewerWindow.xaml, ChartViewerWindow.xaml.cs
+
+3. **BUG #8: Broker Suffix Display** - Missing .sml suffix in pair names
+   - Solution: Add GetPairDisplayName() helper to append broker suffix for display
+   - Files: ChartViewerWindow.xaml.cs, BacktestWindow.xaml.cs
+
+**Backend Fixes (24-32 hours):**
+4. **BUG #1: M1 Data Not Loading** - Multi-pair breaks M1 data loading
+   - Investigation needed: DataLoader state corruption, API response structure
+   - Estimated: 6-8 hours
+
+5. **BUG #2: Sequential Pair Loading** - Pairs processed one at a time, not chronologically
+   - Interim Solution: Async parallel execution + post-processing
+   - Long-term: True chronological bar-by-bar orchestrator (Phase 8.7)
+   - Estimated: 4-6 hours (interim), 16-24 hours (full solution)
+
+6. **BUG #4: Broken Strategy Logic** - Excessive trades, regime detection stuck
+   - Investigation needed: Strategy evaluation frequency, confidence scoring
+   - Estimated: 8-12 hours
+
+7. **BUG #5: Position Limits Not Respected** - 5 positions when max=2
+   - Solution: Create GlobalPositionManager shared across all pairs
+   - Files: position_manager.py, backtest_engine.py, backtest_service.py
+   - Estimated: 4-6 hours
+
+8. **BUG #3: Viewport & Header Mismatch** - UI state management issues
+   - Solution: Fix SwitchToPairTab(), UpdateChartHeader(), zoom logic
+   - Files: ChartViewerWindow.xaml.cs
+   - Estimated: 2-3 hours
+
+**Total Phase 8.6 Effort:** 32-40 hours (2-3 weeks part-time)
+
+**Priority Order:**
+- Week 1: Backend fixes (BUG #5, #2, #1) - 16-20 hours
+- Week 2: UI fixes (BUG #7, #8, #6) + Strategy fixes (BUG #4, #3) - 14-18 hours
+
+**Key Achievement:** Complete analysis and detailed implementation guides created. All bugs have clear solutions with step-by-step code examples. Ready for systematic implementation in next session.
 
 ### ✅ Phase 8.2 - C# MULTI-PAIR UI COMPLETE (Jan 9, 2026)
 **Branch:** phase8.2-multi-pair-ui (CSMMonitor submodule)
