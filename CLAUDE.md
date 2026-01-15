@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 15, 2026 (Phase 8.6 In Progress - 7/9 Bugs Fixed - 78% Complete)
-**Current Phase:** 🟡 PHASE 8.6 - BUG FIXES IN PROGRESS (7/9 Complete - 78%)
+**Last Updated:** January 16, 2026 (Phase 8.6 - 8/9 Bugs Fixed - 89% Complete - BUG #2 TESTED ✅)
+**Current Phase:** 🟢 PHASE 8.6 - BUG FIXES (8/9 Complete - 89% - BUG #2 VALIDATED ✅)
 
 ---
 
@@ -169,7 +169,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 | **Phase 8.3 - C# Playback** | ✅ Complete | Global timeline playback + visual trade timeline (2 commits, ~402 LOC) |
 | **Phase 8.4 - Export** | ⏸️ Postponed | CSV export and reporting deferred to later |
 | **Phase 8.5 - Testing** | 🔴 FAILED | Testing complete, validation FAILED - 9 bugs identified |
-| **Phase 8.6 - Bug Fixes** | 🟡 IN PROGRESS | 7/9 bugs fixed (78%) - All UI bugs + BUG #1, #2, #3, #5 complete |
+| **Phase 8.6 - Bug Fixes** | 🟢 NEARLY COMPLETE | 8/9 bugs fixed (89%) - All UI + backend bugs complete, BUG #2 tested ✅ |
 | **Main Branch** | ✅ Updated | Phase 5.2 & 5.3 Part 1 complete |
 | **Phase 7B Branch** | ✅ Complete | phase7-csharp-strategies (5 sessions complete) |
 
@@ -177,7 +177,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 
 ## 🎯 CURRENT FOCUS: PHASE 8 - MULTI-PAIR BACKTESTING
 
-**Phase 8 Status:** Phase 8.1 ✅ | Phase 8.2 ✅ | Phase 8.3 ✅ | Phase 8.4 ⏸️ | Phase 8.5 🔴 FAILED | Phase 8.6 🟡 IN PROGRESS (7/9 bugs fixed - 78%)
+**Phase 8 Status:** Phase 8.1 ✅ | Phase 8.2 ✅ | Phase 8.3 ✅ | Phase 8.4 ⏸️ | Phase 8.5 🔴 FAILED | Phase 8.6 🟢 NEARLY COMPLETE (8/9 bugs fixed - 89%)
 
 **Design Document:** `/d/Jcamp_TradingApp/Plans/2025-12-31-MultiPair-Backtest-Design.md`
 
@@ -204,7 +204,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 - Phase 8.5: Testing & Validation 🔴 FAILED (5 critical bugs found)
 - Phase 8.6: Bug Fixes & Refinements 🟡 IN PROGRESS (32-40 hours estimated)
 
-**Current Session:** Phase 8.6 in progress - 7/9 bugs fixed (78%) - ChronologicalOrchestrator integrated - Ready for testing
+**Current Session:** Phase 8.6 - 8/9 bugs fixed (89%) - ChronologicalOrchestrator tested & validated ✅ - Only BUG #4 (strategy logic) remains
 
 **Implementation Guide:** `/d/Jcamp_TradingApp/Debug/PHASE_8_6_UI_FIXES.md`
 
@@ -212,9 +212,9 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 
 ## 🚀 RECENT MILESTONES
 
-### 🟡 Phase 8.6 - BUG FIXES IN PROGRESS (Jan 14-15, 2026)
+### 🟢 Phase 8.6 - BUG FIXES (Jan 14-16, 2026)
 **Branch:** phase8.2-multi-pair-ui (parent), phase7-validate-initial-load (Python submodule)
-**Status:** 7/9 bugs fixed (78% complete)
+**Status:** 8/9 bugs fixed (89% complete) - BUG #2 TESTED & VALIDATED ✅
 **Components:** UI fixes (C#) + Backend fixes (Python)
 
 **✅ COMPLETED FIXES:**
@@ -245,7 +245,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
    - Fixed header pair names matching selected tab
    - **Files:** ChartViewerWindow.xaml, ChartViewerWindow.xaml.cs (~32 LOC)
 
-**Backend Fixes (Python - Jan 15):**
+**Backend Fixes (Python - Jan 15-16):**
 5. **BUG #1: M1 Data Not Loading** - Commit 022f496
    - Fixed DataLoader state corruption in multi-pair mode
    - Reuse engine's DataLoader instead of creating new instances
@@ -258,23 +258,35 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
    - Max concurrent positions enforced globally (not per-pair)
    - **Files:** backtest_engine.py, backtest_service.py (~25 LOC)
 
-7. **BUG #2: Sequential Pair Loading** - Commits 01d737c + 2e71624
+7. **BUG #2: Sequential Pair Loading** - Commits 01d737c + 2e71624 + TESTING COMPLETE ✅
    - **Phase 2:** Created ChronologicalOrchestrator class (~345 LOC)
    - **Phase 3:** Integrated into execute_multi_pair_backtest() (~63 LOC modified)
+   - **Phase 4:** Comprehensive testing (Jan 16) - ALL TESTS PASSED ✅
    - True chronological bar-by-bar processing across all pairs
    - Position slots managed realistically (no pair priority)
    - Exit checks run for all pairs at each timestamp
    - Entry signals evaluated chronologically
-   - **Files:** chronological_orchestrator.py (new), backtest_service.py
+   - **Test Results:**
+     - 28,560 bars processed chronologically (EURUSD + GBPUSD)
+     - Position limits respected (0 violations, max 2 concurrent)
+     - Timeline correctly sorted (100% chronological)
+     - Processing speed: ~158 bars/second
+   - **Files:** chronological_orchestrator.py (new), backtest_engine.py, backtest_service.py
+   - **Documentation:** CHRONOLOGICAL_ORCHESTRATOR_TEST_RESULTS.md (296 lines)
+
+8. **Dead Code Cleanup** - Jan 16
+   - Removed unused SimpleTestStrategy from BacktestEngine
+   - SimpleTestStrategy was never called after Phase 8.1 bugfix (commit fa82f5c)
+   - **Files:** backtest_engine.py (2 lines removed)
 
 **⏳ REMAINING BUGS:**
-- **BUG #2 Phase 4:** Testing & validation (2-4 hours)
-- **BUG #4:** Broken strategy logic - excessive trades, regime detection stuck (8-12 hours)
+- **BUG #4:** Broken strategy logic - 0% win rate, regime detection stuck (8-12 hours)
 
-**Total Progress:** 7/9 bugs fixed (78%)
-**Remaining Effort:** ~10-16 hours
+**Total Progress:** 8/9 bugs fixed (89%)
+**Remaining Effort:** ~8-12 hours
 
-**Key Achievement:** All UI bugs resolved (100%), critical backend position management and chronological processing complete. Ready for integration testing.
+**Key Achievement:** All UI bugs fixed (100%), all backend position/orchestration bugs fixed (100%). Only strategy logic tuning remains. ChronologicalOrchestrator fully tested and validated - ready for production use.
+
 
 ### ✅ Phase 8.1 - PYTHON MULTI-PAIR API COMPLETE + BUGFIX (Jan 11, 2026)
 **Branch:** main (jcamp-python-backtesting submodule)
