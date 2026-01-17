@@ -1,8 +1,8 @@
 # CLAUDE.md - JCAMP Forex Trading System Context
 
 **Purpose:** Single authoritative reference for Claude Code to understand project state and start working effectively.
-**Last Updated:** January 16, 2026 (Phase 8.6 - 8/9 Bugs Fixed - 89% Complete - BUG #2 TESTED ✅)
-**Current Phase:** 🟢 PHASE 8.6 - BUG FIXES (8/9 Complete - 89% - BUG #2 VALIDATED ✅)
+**Last Updated:** January 17, 2026 (Phase 8.6 - 9/9 Bugs Fixed - 100% Complete ✅)
+**Current Phase:** ✅ PHASE 8.6 - COMPLETE (9/9 Bugs Fixed - All Strategy Logic Restored)
 
 ---
 
@@ -169,7 +169,7 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 | **Phase 8.3 - C# Playback** | ✅ Complete | Global timeline playback + visual trade timeline (2 commits, ~402 LOC) |
 | **Phase 8.4 - Export** | ⏸️ Postponed | CSV export and reporting deferred to later |
 | **Phase 8.5 - Testing** | 🔴 FAILED | Testing complete, validation FAILED - 9 bugs identified |
-| **Phase 8.6 - Bug Fixes** | 🟢 NEARLY COMPLETE | 8/9 bugs fixed (89%) - All UI + backend bugs complete, BUG #2 tested ✅ |
+| **Phase 8.6 - Bug Fixes** | ✅ COMPLETE | 9/9 bugs fixed (100%) - All bugs resolved, system fully operational! |
 | **Main Branch** | ✅ Updated | Phase 5.2 & 5.3 Part 1 complete |
 | **Phase 7B Branch** | ✅ Complete | phase7-csharp-strategies (5 sessions complete) |
 
@@ -201,10 +201,10 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
 - Phase 8.2: C# Configuration Window ✅ COMPLETE
 - Phase 8.3: C# Playback Window ✅ COMPLETE
 - Phase 8.4: Export & Reporting ⏸️ POSTPONED
-- Phase 8.5: Testing & Validation 🔴 FAILED (5 critical bugs found)
-- Phase 8.6: Bug Fixes & Refinements 🟡 IN PROGRESS (32-40 hours estimated)
+- Phase 8.5: Testing & Validation 🔴 FAILED (9 bugs identified)
+- Phase 8.6: Bug Fixes & Refinements ✅ COMPLETE (All 9 bugs fixed!)
 
-**Current Session:** Phase 8.6 - 8/9 bugs fixed (89%) - ChronologicalOrchestrator tested & validated ✅ - Only BUG #4 (strategy logic) remains
+**Current Session:** Phase 8.6 COMPLETE ✅ - All bugs fixed! Regime detection restored, strategies working, multi-pair system fully operational!
 
 **Implementation Guide:** `/d/Jcamp_TradingApp/Debug/PHASE_8_6_UI_FIXES.md`
 
@@ -279,13 +279,25 @@ ls -la /d/Jcamp_TradingApp/CSMMonitor/JcampForexTrader/Models/Indicators/
    - SimpleTestStrategy was never called after Phase 8.1 bugfix (commit fa82f5c)
    - **Files:** backtest_engine.py (2 lines removed)
 
+9. **BUG #4: Broken Strategy Logic - FIXED** (Jan 17)
+   - **Issue:** Look-ahead bias in regime detection - regime stuck on RANGING
+   - **Root Cause:** backtest_engine.py passed full DataFrame to regime detector
+   - **Solution:** Changed to `df.iloc[:idx+1]` to prevent look-ahead bias
+   - **Results:**
+     - Regime now dynamic: RANGING → TRANSITIONAL → TRENDING ✓
+     - Both strategies active (TREND_RIDER + RANGE_RIDER) ✓
+     - Win rate: 63% (was 0%) ✓
+     - Profit: +15.74% in 4 days (+7.78R) ✓
+   - **Files:** backtest_engine.py (line 331, 2 lines modified)
+   - **Commit:** c01eef0
+
 **⏳ REMAINING BUGS:**
-- **BUG #4:** Broken strategy logic - 0% win rate, regime detection stuck (8-12 hours)
+None - All bugs fixed!
 
-**Total Progress:** 8/9 bugs fixed (89%)
-**Remaining Effort:** ~8-12 hours
+**Total Progress:** 9/9 bugs fixed (100% COMPLETE ✅)
+**Phase 8.6 Status:** ✅ COMPLETE
 
-**Key Achievement:** All UI bugs fixed (100%), all backend position/orchestration bugs fixed (100%). Only strategy logic tuning remains. ChronologicalOrchestrator fully tested and validated - ready for production use.
+**Key Achievement:** ALL Phase 8.6 bugs fixed! UI fully functional (100%), backend position/orchestration working (100%), strategy logic restored (100%). ChronologicalOrchestrator tested & validated. Multi-pair backtesting system fully operational!
 
 
 ### ✅ Phase 8.1 - PYTHON MULTI-PAIR API COMPLETE + BUGFIX (Jan 11, 2026)
